@@ -10,6 +10,8 @@ import sys
 from typing import List, Dict, Callable
 from merge_sort import merge_sort
 from quick_sort import quick_sort
+from heap_sort import HeapSort
+from counting_sort import CountingSort
 
 
 class SortingBenchmark:
@@ -21,6 +23,10 @@ class SortingBenchmark:
             '归并排序': lambda arr: merge_sort(arr.copy()),
             '快速排序(基本)': lambda arr: quick_sort(arr, use_three_way=False),
             '快速排序(三路)': lambda arr: quick_sort(arr, use_three_way=True),
+            '堆排序': lambda arr: HeapSort.heap_sort(arr),
+            '堆排序(原地)': lambda arr: HeapSort.heap_sort_inplace(arr.copy()) if arr else [],
+            '计数排序': lambda arr: CountingSort.counting_sort(arr) if arr and min(arr) >= 0 else [],
+            '计数排序(含负数)': lambda arr: CountingSort.counting_sort_with_negative(arr) if arr else [],
         }
     
     def generate_test_data(self, size: int, data_type: str = 'random') -> List[int]:
